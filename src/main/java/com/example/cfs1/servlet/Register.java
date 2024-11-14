@@ -12,28 +12,27 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-@WebServlet("/login")
-public class Login extends HttpServlet {
+@WebServlet("/registrati")
+public class Register extends HttpServlet {
 	private static final Logger log = LogManager.getLogger(MultipleParamReader.class);
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String email = request.getParameter("e-mail");
-		String password = request.getParameter("password");
-
-		if (email == null) {
+        String email = request.getParameter("Email");
+        String password = request.getParameter("Password");
+        String confermaPassword = request.getParameter("Conferma Password");
+        
+        if (!password.equals(confermaPassword)) {
+            response.getWriter().println("Le password non corrispondono.");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        if (email == null) {
 			log.warn("No e-mail passed as parameter!");
 		} else {
 			log.trace("%s as e-mail", email);
 		}
-
-		if ("admin@google.it".equals(email) && "password123".equals(password)) {
-			response.sendRedirect("login.html");
-		} else {
-			response.sendRedirect("error.html");
-		} //commento
 	}
+
 }
