@@ -34,6 +34,6 @@ public class Login extends HttpServlet {
 			response.sendRedirect("login.html");
 		} else {
 			response.sendRedirect("error.html");
-		}
+		} //commento
 	}
 }
