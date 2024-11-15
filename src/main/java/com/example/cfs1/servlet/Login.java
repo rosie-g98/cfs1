@@ -26,7 +26,7 @@ public class Login extends HttpServlet {
 		
 		if (email == null || email.isEmpty()) {
 			log.warn("No e-mail passed as parameter!");
-			request.getRequestDispatcher("error.html").forward(request, response); // Inoltra alla pagina di errore
+			request.getRequestDispatcher("error.html").forward(request, response); 
             return;
 		} else {
 			log.trace("%s as e-mail", email);
@@ -34,14 +34,15 @@ public class Login extends HttpServlet {
 
 		if (password == null || password.isEmpty()) {
 		    log.warn("No password passed as parameter or it is empty!");
-		    request.getRequestDispatcher("error.html").forward(request, response); // Inoltra alla pagina di errore
+		    request.getRequestDispatcher("error.html").forward(request, response); 
             return;
 		}	
 
 		if ("admin@google.it".equals(email) && "password123".equals(password)) {
 			response.sendRedirect("Homepage.html");
 		} else {
-		    request.setAttribute("errorMessage", "Password errata. Riprova.");
+			request.getRequestDispatcher("error.html").forward(request, response); 
+
 		 
 		} 
 		
