@@ -38,10 +38,11 @@ public class Login extends HttpServlet {
 		}	
 
 		if ("admin@google.it".equals(email) && "password123".equals(password)) {
-			response.sendRedirect("Homepage.html");
+		    log.info("Valid login. Redirecting to areaPersonale.html...");
+		    response.sendRedirect("AreaPersonale.html");
 		} else {
-			request.getRequestDispatcher("error.html").forward(request, response); 
-
+		    log.warn("Invalid login attempt with email: " + email);
+		    request.getRequestDispatcher("error.html").forward(request, response);
 		 
 		} 
 		
