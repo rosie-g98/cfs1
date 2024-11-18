@@ -122,6 +122,7 @@ INSERT INTO film (titolo, regista, categoria_id, lingua, anno, mood_id) VALUES
 ("La La Land", "Damien Chazelle", 3,"ENG","2016-01-01",2),
 ("The Grand Budapest Hotel", "Wes Anderson",3, "ENG", "2014-01-01",2),
 ("Mamma Mia!", "Phyllida Lloyd", 1,"ENG","2008-01-01", 2),
-("Into the Wild", "Sean Penn", 4, "ENG","2007-01-01", 1);
+("Into the Wild", "Sean Penn", 4, "ENG","2007-01-01", 1),
+("The Fast and the Furious: Tokyo Drift", "Justin Lin", 5, "ENG","2006-07-14", 4);
 
 commit;
