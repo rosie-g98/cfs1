@@ -10,7 +10,7 @@
 <body>
   <div class="container">
       <h1>Registrati</h1>
-      <!-- Messaggi di errore dinamici -->
+      <!-- Messaggi di errore -->
       <c:if test="${not empty error}">
           <p class="error">${error}</p>
       </c:if>
