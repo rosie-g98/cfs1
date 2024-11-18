@@ -13,38 +13,45 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/registrati")
 public class Register extends HttpServlet {
-    private static final Logger log = LogManager.getLogger(Register.class);
-    private static final long serialVersionUID = 1L;
+	private static final Logger log = LogManager.getLogger(Register.class);
+	private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String email = request.getParameter("Email");
-        String password = request.getParameter("Password");
-        String confermaPassword = request.getParameter("Conferma Password");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String email = request.getParameter("Email");
+		String password = request.getParameter("Password");
+		String confermaPassword = request.getParameter("Conferma Password");
 
-        if (email == null || email.isEmpty()) {
-            log.warn("No e-mail passed as parameter!");
-            request.getRequestDispatcher("error.html").forward(request, response);
-            return;
-        } else {
-            log.trace("%s as e-mail", email);
-        }
+		if (email == null || email.isEmpty() || !email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+			request.setAttribute("error", "Email non valida.");
+			request.getRequestDispatcher("Register.jsp").forward(request, response);
+			return;
+		} else {
+			log.trace("%s as e-mail", email);
+		}
 
-        if (password == null || password.isEmpty()) {
-            log.warn("No password passed as parameter or it is empty!");
-            request.getRequestDispatcher("password_mismatch.html").forward(request, response);
-            return;
-        }
+		if (password == null || password.isEmpty()) {
+			request.setAttribute("error", "Password vuota");
+			request.getRequestDispatcher("Register.jsp").forward(request, response);
+			return;
+		}
 
-        if (!password.equals(confermaPassword)) {
-            response.getWriter().println("Le password non corrispondono.");
-            response.sendRedirect("password_mismatch.html");
-            return;
-        }
-        log.info("User registered successfully with %s as e-mail", email);
+		if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+		    request.setAttribute("error", "La password deve contenere almeno 8 caratteri, inclusi una lettera maiuscola, un numero e un carattere speciale.");
+		    request.getRequestDispatcher("Register.jsp").forward(request, response);
+		    return;
+		}
+		
+		if (!password.equals(confermaPassword)) {
+			response.getWriter().println("Le password non corrispondono.");
+			request.getRequestDispatcher("Register.jsp");
+			return;
+		}
 
-        request.getRequestDispatcher("registration_success.html").forward(request, response);
+		log.info("User registered successfully with %s as e-mail", email);
 
-    }
+		response.sendRedirect("AreaPersonale.html");
+
+	}
 
 }

@@ -11,3 +11,7 @@ form {
     text-align: center;
     border-color:rgb(94, 4, 179) ;
 }
+.error {
+    color: red;
+    font-size: 0.9em;
+}
