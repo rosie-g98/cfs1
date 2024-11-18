@@ -2,10 +2,14 @@ package com.example.cfs1.servlet;
 
 import java.io.IOException;
 
+import javax.sql.DataSource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.example.cfs1.dao.EmailDao;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,10 +17,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/login")
+
 public class Login extends HttpServlet {
 	private static final Logger log = LogManager.getLogger(Login.class);
 	private static final long serialVersionUID = 1L;
 
+	@Resource(name = "jdbc/cfs1")
+	private DataSource ds;
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -48,7 +56,21 @@ public class Login extends HttpServlet {
 			request.getRequestDispatcher("LogIn.jsp").forward(request, response);
 			return;
 		 
-		} 
+		}
+		 try (EmailDao dao = new EmailDao(ds)) {
+	            boolean isValidUser = dao.validateUser(email, password);
+
+	            if (isValidUser) {
+	                log.info("Login riuscito per utente: {}", email);
+	                response.sendRedirect("AreaPersonale.html");
+	            } else {
+	                log.warn("Tentativo di login fallito per utente: {}", email);
+	                request.setAttribute("error", "Login fallito");
+	            }
+	        } catch (Exception e) {
+	            log.error("Errore durante il login per utente: {}", email, e);
+	            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore interno del server.");
+	        }
+	    }
 		
 	}
-}
