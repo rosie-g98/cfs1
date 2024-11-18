@@ -18,6 +18,6 @@
 	        response.setContentType("text/html");
 	        response.setCharacterEncoding("UTF-8");
 
-	        request.getRequestDispatcher("/Homepage.html").forward(request, response);
+	        request.getRequestDispatcher("Homepage.html").forward(request, response);
 }
 	}
