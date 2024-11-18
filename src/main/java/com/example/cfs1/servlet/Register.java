@@ -43,8 +43,8 @@ public class Register extends HttpServlet {
 		}
 		
 		if (!password.equals(confermaPassword)) {
-			response.getWriter().println("Le password non corrispondono.");
-			request.getRequestDispatcher("Register.jsp");
+			request.setAttribute("error", "Le password non corrispondono.");
+			request.getRequestDispatcher("Register.jsp").forward(request, response);
 			return;
 		}
 
