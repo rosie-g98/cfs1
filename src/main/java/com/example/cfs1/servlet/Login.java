@@ -25,16 +25,18 @@ public class Login extends HttpServlet {
 		
 		if (email == null || email.isEmpty()) {
 			log.warn("No e-mail passed as parameter!");
-			request.getRequestDispatcher("error.html").forward(request, response); 
-            return;
+		    request.setAttribute("error", "Inserire un indirizzo e-mail.");
+					request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+					return;
 		} else {
 			log.trace("%s as e-mail", email);
 		}
 
 		if (password == null || password.isEmpty()) {
 		    log.warn("No password passed as parameter or it is empty!");
-		    request.getRequestDispatcher("error.html").forward(request, response); 
-            return;
+		    request.setAttribute("error", "Password vuota");
+			request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+			return;
 		}	
 
 		if ("admin@google.it".equals(email) && "password123".equals(password)) {
@@ -42,7 +44,9 @@ public class Login extends HttpServlet {
 		    response.sendRedirect("AreaPersonale.html");
 		} else {
 		    log.warn("Invalid login attempt with email: " + email);
-		    request.getRequestDispatcher("error.html").forward(request, response);
+		    request.setAttribute("error", "Credenziali non valide");
+			request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+			return;
 		 
 		} 
 		

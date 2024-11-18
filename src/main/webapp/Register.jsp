@@ -39,6 +39,6 @@
 
       <!-- Link per accesso -->
       <div class="message">
-          Hai già un account? <a href="LogIn.html">Accedi</a>
+          Hai già un account? <a href="LogIn.jsp">Accedi</a>
       </div>
   </div>
