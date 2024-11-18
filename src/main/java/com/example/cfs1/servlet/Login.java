@@ -58,22 +58,22 @@ public class Login extends HttpServlet {
 			return;
 
 		}
-		 try (EmailDao dao = new EmailDao(ds)) {
-	            if (dao.validateUser(email, password)) {
-	                log.info("User {} authenticated successfully.", email);
+		try (EmailDao dao = new EmailDao(ds)) {
+			if (dao.validateUser(email, password)) {
+				log.info("User {} authenticated successfully.", email);
 
-	                // Creazione della sessione
-	                HttpSession session = request.getSession();
-	                session.setAttribute("user", email);
-	                response.sendRedirect("AreaPersonale.html");
-	            } else {
-	                log.warn("Invalid login attempt with email: {}", email);
-	                request.setAttribute("error", "Credenziali non valide.");
-	                request.getRequestDispatcher("LogIn.jsp").forward(request, response);
-	            }
-	        } catch (Exception e) {
-	            log.error("Errore durante il login per utente: {}", email, e);
-	            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore interno del server.");
-	        }
-	    }
+				// Creazione della sessione
+				HttpSession session = request.getSession();
+				session.setAttribute("user", email);
+				response.sendRedirect("AreaPersonale.html");
+			} else {
+				log.warn("Invalid login attempt with email: {}", email);
+				request.setAttribute("error", "Credenziali non valide.");
+				request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			log.error("Errore durante il login per utente: {}", email, e);
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore interno del server.");
+		}
 	}
+}

@@ -37,10 +37,10 @@ public class EmailDao implements AutoCloseable {
 	    public boolean isEmailExists(String email) throws Exception {
 	        String query = "SELECT COUNT(*) FROM user WHERE email = ?";
 	        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-	            stmt.setString(1, email); // Imposta il parametro email nel PreparedStatement
+	            stmt.setString(1, email); 
 	            try (ResultSet rs = stmt.executeQuery()) {
 	                if (rs.next()) {
-	                    return rs.getInt(1) > 0; // Restituisce true se l'email esiste, false altrimenti
+	                    return rs.getInt(1) > 0; //  true se l'email esiste, se no false 
 	                }
 	            }
 	        }
