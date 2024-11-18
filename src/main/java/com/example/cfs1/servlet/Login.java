@@ -48,17 +48,17 @@ public class Login extends HttpServlet {
 			return;
 		}
 
-		if ("admin@google.it".equals(email) && "password123".equals(password)) {
-			log.info("Valid login. Redirecting to areaPersonale.html...");
-			response.sendRedirect("AreaPersonale.html");
-		} else {
-			log.warn("Invalid login attempt with email: " + email);
-			request.setAttribute("error", "Credenziali non valide");
-			request.getRequestDispatcher("LogIn.jsp").forward(request, response);
-			return;
-
-		}
-		try (EmailDao dao = new EmailDao(ds)) {
+//		if ("admin@google.it".equals(email) && "password123".equals(password)) {
+//			log.info("Valid login. Redirecting to areaPersonale.html...");
+//			response.sendRedirect("AreaPersonale.html");
+//		} else {
+//			log.warn("Invalid login attempt with email: " + email);
+//			request.setAttribute("error", "Credenziali non valide");
+//		request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+//			return;
+//
+//	}
+		try (EmailDao dao = new EmailDao()) {
 			if (dao.validateUser(email, password)) {
 				log.info("User {} authenticated successfully.", email);
 

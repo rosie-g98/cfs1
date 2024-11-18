@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
 			return;
 		}
 
-		try (EmailDao userDao = new EmailDao(ds)) {
+		try (EmailDao userDao = new EmailDao()) {
 			if (userDao.isEmailExists(email)) {
 				// L'utente esiste già, invia un messaggio di errore.
 				log.info("User with email {} already exists.", email);
