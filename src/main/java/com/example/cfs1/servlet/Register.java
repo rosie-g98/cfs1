@@ -2,9 +2,14 @@ package com.example.cfs1.servlet;
 
 import java.io.IOException;
 
+import javax.sql.DataSource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.example.cfs1.dao.EmailDao;
+
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +20,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Register extends HttpServlet {
 	private static final Logger log = LogManager.getLogger(Register.class);
 	private static final long serialVersionUID = 1L;
+
+	@Resource(name = "jdbc/cfs1")
+	private DataSource ds;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -36,17 +44,29 @@ public class Register extends HttpServlet {
 			return;
 		}
 
-	
-		
 		if (!password.equals(confermaPassword)) {
 			request.setAttribute("error", "Le password non corrispondono.");
 			request.getRequestDispatcher("Register.jsp").forward(request, response);
 			return;
 		}
 
-		log.info("User registered successfully with %s as e-mail", email);
+		try (EmailDao userDao = new EmailDao(ds)) {
+			if (userDao.isEmailExists(email)) {
+				// L'utente esiste già, invia un messaggio di errore.
+				log.info("User with email {} already exists.", email);
+				request.setAttribute("error", "L'email è già registrata.");
+				request.getRequestDispatcher("Register.jsp").forward(request, response);
+			} else {
+				// L'utente non esiste, puoi procedere con la registrazione.
+				log.info("Registering new user: {}", email);
+				response.sendRedirect("AreaPersonale.html");
+			}
+		} catch (Exception e) {
+			log.error("Error during user registration", e);
+			throw new ServletException("Errore durante la registrazione dell'utente", e);
+		}
 
-		response.sendRedirect("AreaPersonale.html");
+		log.info("User registered successfully with %s as e-mail", email);
 
 	}
 
