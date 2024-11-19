@@ -1,43 +1,90 @@
-p1 {
-    color:rgb(252, 211, 252, 0.84) ;
-    font-style: italic;
-    text-align: center;
-    
+* {
+    margin: 0;
+    margin-top: 0;
+    padding: 0;
+    box-sizing: border-box;
+
 }
 
 body {
-    background-color: rgb(252, 211, 252, 0.84);
+    background-color: rgba(255, 255, 255, 0.84);
     text-align: center;
+    display: grid;
+    place-content: center;
 }
+
 
 h1 {
-    color:rgba(153, 6, 143, 0.736);
+    color: rgba(153, 6, 143, 0.736);
     text-align: center;
 
 }
 
-.btn-outline-light {
-    color: rgb(226, 3, 255);
-    background-color: rgb(251, 224, 250);
-    border-color: rgb(106, 2, 72)
+
+.card-img-top {
+
+    width: auto;
+    height: 250px;
+    max-width: 100%;
+    border-radius: 40px;
+    border: 2px solid rgb(94, 4, 179);
+
+
 }
 
-.btn-outline-light:hover {
 
-    color: rgb(205, 0, 188);
-    background-color: rgba(255, 255, 255, 0.89);
-    border-color:rgb(0, 0, 0);
+.card-title1 {
     font-weight: bold;
-    
+    font-size: 30px;
+    color: rgb(110, 7, 229);
+    margin-top: -50px;
+
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 30px;
+    color: rgb(110, 7, 229);
 
 }
 
 
+.card-title:hover {
+
+    font-style: italic;
+}
+
+a {
+    text-align: center;
+}
 
 
 
+.card {
+    position: relative;
+    margin: 0 auto;
+    padding: 3.5em;
+    width: 900px;
+    text-align: center;
+    border-radius: 40px;
+    position: relative;
+    padding: 70px 20px 40px;
+    border: 2px solid rgb(94, 4, 179);
+}
 
 
+.card::after,
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: conic-gradient(rgb(251, 153, 244), rgb(119, 0, 255), rgb(255, 0, 255), rgb(251, 153, 244));
+    padding: 3px;
+    z-index: -1;
+    border-radius: 40px;
+}
 
-
-
+.card::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
