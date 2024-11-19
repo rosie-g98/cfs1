@@ -12,6 +12,8 @@
 <body background="img/Sfondo.png">
     <div class="wrapper">
         <h1>Registrati</h1>
+        <br>
+        <br>
 
         <form action="registrati" method="post">
             <!-- Campo e-mail -->
