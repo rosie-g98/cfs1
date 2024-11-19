@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {}
+
+#nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    
+}
+
+.navbar {
+    background-image: linear-gradient(rgba(153, 6, 143, 0.736),rgba(153, 6, 143, 0.736));
+    padding: 0;
+    
+}
+
+.navbar-brand img {
+    height: 100px;
+    padding-left: 20px;
+}
+
+.navbar-nav li {
+    padding: 0 10px;
+}
+
+.navbar-nav li a {
+    color: #fff;
+    font-weight: 600;
+    float: right;
+    text-align: left;
+}
+
+.navbar-toggler {
+
+    outline: none;
+}
+
+.nav-exit {
+    text-align: right;
+}
+
+h1 {
+    color: rgba(153, 6, 143, 0.736);
+    text-align: center;
+
+}
+
+
+.card-img-top {
+
+    width: auto;
+    height: 250px;
+    max-width: 100%;
+    border-radius: 40px;
+
+}
+
+
+.card-title1 {
+    font-weight: bold;
+    font-size: 30px;
+    color: rgb(110, 7, 229);
+    margin-top: -50px;
+
+
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 30px;
+    color: rgb(110, 7, 229);
+
+}
+
+
+.card-title:hover {
+
+    font-style: italic;
+}
+
+a {
+    text-align: center;
+}
+
+
+
+.card {
+    position: relative;
+    margin: 0 auto;
+    padding: 3.5em;
+    width: 900px;
+    text-align: center;
+    border-radius: 40px;
+    position: relative;
+    margin-top: 50px;
+    background: transparent;
+    border: 2px solid rgb(94, 4, 179);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: rgb(94, 4, 179);
+    font-weight: bold;
+    text-align: center;
+    border-radius: 40px;
+    padding: 70px 20px 40px;
+}

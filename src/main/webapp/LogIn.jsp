@@ -40,7 +40,7 @@
 			</div>
 		</form>
 		<div>
-			<p style="color: red;" id="errorMessage"></p>
+			<p style="color: red;" text id="errorMessage"></p>
 		</div>
 
 		</body>
