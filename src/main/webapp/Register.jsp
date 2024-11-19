@@ -12,10 +12,6 @@
 <body background="img/Sfondo.png">
     <div class="wrapper">
         <h1>Registrati</h1>
-        <!-- Messaggi di errore -->
-        <c:if test="${not empty error}">
-            <p class="error">${error}</p>
-        </c:if>
 
         <form action="registrati" method="post">
             <!-- Campo e-mail -->
@@ -42,7 +38,14 @@
             <button type="submit">Registrati</button>
             <br>
             <br>
-        </form>
+             <!-- Messaggi di errore -->
+        <div>
+			<c:if test="${not empty error}">
+			<p class="error">${error}</p></c:if>
+			<p style="color: rgb(94, 4, 179)"; id="errorMessage"></p>
+		</div>
+        <br>
+        <br>
 
         <!-- Link per accesso -->
         <div class="message">
