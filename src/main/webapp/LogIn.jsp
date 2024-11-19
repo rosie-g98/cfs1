@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 		<!DOCTYPE html>
 		<html lang="en">
 
@@ -13,9 +14,8 @@
 
 		<body background="img/Sfondo.png"></body>
 		<!-- Messaggi di errore -->
-		<c:if test="${not empty error}">
-			<p class="error">${error}</p>
-		</c:if>
+		
+			
 		<form action="/cfs1/login" method="POST">
 
 			<div class="wrapper">
@@ -38,11 +38,13 @@
 					</div>
 				</div>
 			</div>
+			<div>
+				<c:if test="${not empty error}">
+				<p class="error">${error}</p></c:if>
+				<p style="color: rgb(94, 4, 179)"; id="errorMessage"></p>
+			</div>
 		</form>
-		<div>
-			<p style="color: red;" text id="errorMessage"></p>
-		</div>
-
+	
 		</body>
 
 		</html>
