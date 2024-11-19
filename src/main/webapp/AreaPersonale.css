@@ -13,7 +13,7 @@ body {}
 }
 
 .navbar {
-    background-color: rgba(153, 6, 143, 0.736));
+    background-image: linear-gradient(rgba(153, 6, 143, 0.736),rgba(153, 6, 143, 0.736));
     padding: 0;
     
 }
