@@ -16,7 +16,6 @@
 		<!-- Messaggi di errore -->
 		
 			
-		</c:if>
 		<form action="/cfs1/login" method="POST">
 
 			<div class="wrapper">
