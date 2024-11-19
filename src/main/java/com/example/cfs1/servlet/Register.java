@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.cfs1.dao.EmailDao;
+import com.example.cfs1.dao.UserDao;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Register extends HttpServlet {
 	private static final Logger log = LogManager.getLogger(Register.class);
 	private static final long serialVersionUID = 1L;
+	private UserDao userDao = new UserDao();
 
 	@Resource(name = "jdbc/cfs1")
 	private DataSource ds;
@@ -65,9 +67,23 @@ public class Register extends HttpServlet {
 			log.error("Error during user registration", e);
 			throw new ServletException("Errore durante la registrazione dell'utente", e);
 		}
+		boolean success;
+		try {
+			success = userDao.insertUser(email, password);
+			if (success) {
+				request.getRequestDispatcher("AreaPersonale.html").forward(request, response);
+				return;
 
+			} else {
+				request.setAttribute("error", "Errore. Riprova più tardi");
+				request.getRequestDispatcher("Register.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			log.error("Error during user registration", e);
+			throw new ServletException("Errore durante la registrazione dell'utente", e);
+		}
 		log.info("User registered successfully with %s as e-mail", email);
-
+		return;
 	}
 
 }
