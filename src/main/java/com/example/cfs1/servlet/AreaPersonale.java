@@ -17,11 +17,9 @@ public class AreaPersonale {
 	        String action = request.getParameter("action");
 
 	        if ("MUSICA".equalsIgnoreCase(action)) {
-	            response.sendRedirect("MusicaServlet");
+	        	request.getRequestDispatcher("Quiz.html").forward(request, response);;
 	        } else if ("FILM".equalsIgnoreCase(action)) {
-	            response.sendRedirect("FilmServlet");
-	        } else {
-	            response.sendRedirect("areaPersonale");
-	        }
+	        	request.getRequestDispatcher("Quiz.html").forward(request, response);;
+	        } 
 	    }
 	}
